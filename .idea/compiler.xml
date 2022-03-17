@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="SCGateway" />
+        <module name="SpringCloudCommonService" />
+        <module name="SpringCloudEureka" />
+        <module name="SpringCloudAccessLayer" />
+        <module name="SpringCloudGateway" />
+        <module name="SpringCloudConfig" />
+        <module name="SpringCloudTurbine" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SCGateway" target="1.8" />
+      <module name="SpringCloudAccessLayer" target="1.8" />
+      <module name="SpringCloudCommonService" target="1.8" />
+      <module name="SpringCloudConfig" target="1.8" />
+      <module name="SpringCloudEureka" target="1.8" />
+      <module name="SpringCloudGateway" target="1.8" />
+      <module name="SpringCloudTurbine" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SCGateway" options="-parameters" />
+      <module name="SpringCloudAccessLayer" options="-parameters" />
+      <module name="SpringCloudCommonService" options="-parameters" />
+      <module name="SpringCloudConfig" options="-parameters" />
+      <module name="SpringCloudEureka" options="-parameters" />
+      <module name="SpringCloudGateway" options="-parameters" />
+      <module name="SpringCloudTurbine" options="-parameters" />
+    </option>
+  </component>
+</project>

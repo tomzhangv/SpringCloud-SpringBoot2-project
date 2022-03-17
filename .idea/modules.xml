@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SCGateway/SCGateway.iml" filepath="$PROJECT_DIR$/SCGateway/SCGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpringCloud-SpringBoot2-project.iml" filepath="$PROJECT_DIR$/.idea/SpringCloud-SpringBoot2-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudAccessLayer/SpringCloudAccessLayer.iml" filepath="$PROJECT_DIR$/SpringCloudAccessLayer/SpringCloudAccessLayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudCommonService/SpringCloudCommonService.iml" filepath="$PROJECT_DIR$/SpringCloudCommonService/SpringCloudCommonService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudConfig/SpringCloudConfig.iml" filepath="$PROJECT_DIR$/SpringCloudConfig/SpringCloudConfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudEureka/SpringCloudEureka.iml" filepath="$PROJECT_DIR$/SpringCloudEureka/SpringCloudEureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudGateway/SpringCloudGateway.iml" filepath="$PROJECT_DIR$/SpringCloudGateway/SpringCloudGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringCloudTurbine/SpringCloudTurbine.iml" filepath="$PROJECT_DIR$/SpringCloudTurbine/SpringCloudTurbine.iml" />
+    </modules>
+  </component>
+</project>

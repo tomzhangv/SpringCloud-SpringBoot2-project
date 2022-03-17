@@ -1,0 +1,59 @@
+server:
+  port: 18080
+  
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      default-filters:
+      - RequestTime=true
+      - name: RequestRateLimiter
+        args: 
+          key-resolver: '#{@hostAddrKeyResolver}'
+          redis-rate-limiter.replenishRate: 10
+          redis-rate-limiter.burstCapacity: 100
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+      - id: ACCESSLAYER
+        uri: lb://ACCESSLAYER
+        predicates:
+          - Path=/accesslayer/**
+  redis:
+    host: 59.110.239.164
+    port: 6379
+    database: 1
+#    password: mypass
+    timeout: 1200
+
+eureka: 
+  instance:
+    hostname: localhost
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    prefer-ip-address: true
+  client: 
+    region: javadevmap
+    availability-zones: 
+      javadevmap: map_eureka
+    service-url: 
+      map_eureka: http://admin:mypass@localhost:18001/eureka/
+      
+management:
+  endpoints: 
+    web:
+      exposure: 
+        include:
+        - shutdown
+        - info
+        - health
+
+  endpoint:
+    shutdown:
+      enabled: true
+
+info:
+  author: hw
+  project: gateway demo

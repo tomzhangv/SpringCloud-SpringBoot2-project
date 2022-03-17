@@ -1,0 +1,215 @@
+server:
+  port: 18080
+spring:
+  profiles: 
+    active:
+    - path_route
+
+---
+spring:
+  profiles: after_route
+  cloud:
+    gateway:
+      routes:
+      - id: after_route
+        uri: http://httpbin.org:80
+        predicates:
+        - After=2019-01-20T17:42:47.789-07:00[America/Denver]
+        
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: header_route
+        uri: http://httpbin.org:80
+        predicates:
+        - Header=X-Request-Id, \d+
+  profiles: header_route
+# curl -H 'X-Request-Id:1' localhost:18080
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: cookie_route
+        uri: http://httpbin.org:80
+        predicates:
+        - Cookie=name, forezp
+  profiles: cookie_route
+# curl -H 'Cookie:name=forezp' localhost:18080
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: host_route
+        uri: http://httpbin.org:80
+        predicates:
+        - Host=**.javadevmap.com
+  profiles: host_route
+# curl -H 'Host:www.fangzhipeng.com' localhost:18080
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: method_route
+        uri: http://httpbin.org:80
+        predicates:
+        - Method=GET
+  profiles: method_route
+# curl localhost:18080
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: path_route
+#        uri: http://httpbin.org:80
+#        predicates:
+#        - Path=/get
+##        - Method=GET
+#  profiles: path_route
+## curl localhost:18080/get
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: path_route
+#        uri: http://httpbin.org:80
+#        filters:
+#        - AddRequestHeader=X-Request-Foo, Bar
+#        predicates:
+#        - Path=/get
+##        - Method=GET
+#  profiles: path_route
+## curl localhost:18080/get
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: path_route
+#        uri: http://httpbin.org:80
+#        filters:
+#        - RewritePath=/foo/(?<segment>.*), /$\{segment}
+#        predicates:
+#        - Path=/foo/**
+##        - Method=GET
+#  profiles: path_route
+## curl localhost:18080/foo/get
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      default-filters:
+#      - RequestTime=false
+#      routes:
+#      - id: path_route
+#        uri: http://httpbin.org:80
+#        filters:
+#        - RequestTime=true
+#        predicates:
+#        - Path=/get
+##        - Method=GET
+#  profiles: path_route
+## curl localhost:18080/get
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: path_route
+#        uri: http://httpbin.org:80
+#        filters:
+#        - name: RequestRateLimiter
+#          args:
+#            key-resolver: '#{@hostAddrKeyResolver}'
+#            redis-rate-limiter.replenishRate: 10
+#            redis-rate-limiter.burstCapacity: 100
+#        predicates:
+#        - Path=/get
+##        - Method=GET
+#  profiles: path_route
+#  redis:
+#    host: 59.110.239.164
+#    port: 6379
+#    database: 1
+##    password: mypass
+#    timeout: 1200
+#  
+## curl localhost:18080/get
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lowerCaseServiceId: true
+#  profiles: path_route
+#  redis:
+#    host: 59.110.239.164
+#    port: 6379
+#    database: 1
+##    password: mypass
+#    timeout: 1200
+#    
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/  
+#
+## curl localhost:18080/get
+
+---
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+      - id: service-hi
+        uri: lb://SERVICE-HI
+        predicates:
+          - Path=/demo/**
+        filters:
+          - StripPrefix=1
+  profiles: path_route
+  redis:
+    host: 59.110.239.164
+    port: 6379
+    database: 1
+#    password: mypass
+    timeout: 1200
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  
+
+# curl localhost:18080/demo/get
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: query_route
+        uri: http://httpbin.org:80
+        predicates:
+        - Query=foo, ba.
+#        - Query=foo
+  profiles: query_route
+# curl localhost:18080/get?foo=bar
